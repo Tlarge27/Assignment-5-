@@ -7,17 +7,28 @@
 # Output: 3
 
 def most_frequent(numbers):
-    # Your code here
-    pass
+    frequency = {}
+    max_count = 0
+    most_common = None
+
+    for num in numbers: 
+        frequency[num] = frequency.get(num, 0) + 1
+        if frequency[num] > max_count:
+            max_count = frequency[num]
+            most_common = num
+    return most_common
+
+
+print(most_frequent([1, 3, 2, 3, 4, 1, 3]))
 
 """
 Time and Space Analysis for problem 1:
-- Best-case:
-- Worst-case:
-- Average-case:
-- Space complexity:
+- Best-case: O(n)
+- Worst-case: O(n)
+- Average-case: O(n)
+- Space complexity: O(n)
 - Why this approach?
-- Could it be optimized?
+- Could it be optimized? I don't think so. It's already optimal for most cases.
 """
 
 
@@ -29,17 +40,24 @@ Time and Space Analysis for problem 1:
 # Output: [4, 5, 6, 7]
 
 def remove_duplicates(nums):
-    # Your code here
-    pass
+    seen = set()
+    result = []
+    for num in nums:
+        if num not in seen:
+            seen.add(num)
+            result.append(num)
+    return result
+    
+print(remove_duplicates([4, 5, 4, 6, 5, 7]))
 
 """
 Time and Space Analysis for problem 2:
-- Best-case:
-- Worst-case:
-- Average-case:
-- Space complexity:
-- Why this approach?
-- Could it be optimized?
+- Best-case:O(n)
+- Worst-case: O(n)
+- Average-case: O(n)
+- Space complexity: O(n)
+- Why this approach? This way it keeps the order of the list but makes the changes neccessary to remove dupes
+- Could it be optimized? Not really. To keep the order the list needs to be scanned. 
 """
 
 
@@ -52,17 +70,26 @@ Time and Space Analysis for problem 2:
 # Output: [(1, 4), (2, 3)]
 
 def find_pairs(nums, target):
-    # Your code here
-    pass
+    seen = set()
+    pairs = set()
+
+    for num in nums:
+        complement = target - num
+        if complement in seen:
+            pairs.add(tuple(sorted((num, complement))))
+        seen.add(num)
+    return list(pairs) 
+
+print(find_pairs([1, 2, 3, 4], 5))
 
 """
 Time and Space Analysis for problem 3:
-- Best-case:
-- Worst-case:
-- Average-case:
-- Space complexity:
-- Why this approach?
-- Could it be optimized?
+- Best-case: O(n)
+- Worst-case: O(n)
+- Average-case: O(n)
+- Space complexity: O(n)
+- Why this approach? This avoids nested loops which would add time
+- Could it be optimized? It's already optimal for this type of list. 
 """
 
 
@@ -75,16 +102,28 @@ Time and Space Analysis for problem 3:
 # add_n_items(6) → should print when resizing happens.
 
 def add_n_items(n):
-    # Your code here
-    pass
+    capacity = 1
+    lst = [None] * capacity
+    size = 0
 
+    for i in range(n):
+        if size == capacity:
+            capacity *= 2
+            print(f"Resizing to capacity: {capacity}")
+            new_lst = [None] * capacity
+            for j in range(size):
+                new_lst[j] = lst[j]
+            lst = new_lst
+        lst[size] = i
+        size += 1
+add_n_items(6)
 """
 Time and Space Analysis for problem 4:
-- When do resizes happen?
-- What is the worst-case for a single append?
-- What is the amortized time per append overall?
-- Space complexity:
-- Why does doubling reduce the cost overall?
+- When do resizes happen? When the size reaches capacity
+- What is the worst-case for a single append? O(n) during resizing
+- What is the amortized time per append overall? O(1)
+- Space complexity: O(n)
+- Why does doubling reduce the cost overall? Because of doubling it cuts down the amount of times it has to resize. 
 """
 
 
@@ -98,15 +137,21 @@ Time and Space Analysis for problem 4:
 # Because: [1, 1+2, 1+2+3, 1+2+3+4]
 
 def running_total(nums):
-    # Your code here
-    pass
+    total = 0
+    result = []
+    for num in nums:
+        total += num
+        result.append(total)
+    return result 
+
+print(running_total([1, 2, 3, 4]))
 
 """
 Time and Space Analysis for problem 5:
-- Best-case:
-- Worst-case:
-- Average-case:
-- Space complexity:
-- Why this approach?
-- Could it be optimized?
+- Best-case: O(n)
+- Worst-case: 0(n)
+- Average-case: O(n)
+- Space complexity: O(n)
+- Why this approach? It's a simple one pass compute. 
+- Could it be optimized? Already opimtal. 
 """
